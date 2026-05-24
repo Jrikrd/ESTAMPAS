@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#2563eb">
+<title>Álbum Panini FIFA 2026</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f9fafb;color:#111827}
+  button,input{font-family:inherit}
+  ::-webkit-scrollbar{width:3px}
+  ::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:2px}
+  #app{display:flex;flex-direction:column;height:100vh;max-width:480px;margin:0 auto;background:#fff;position:relative}
+  .header{background:#fff;border-bottom:1px solid #f3f4f6;flex-shrink:0}
+  .header-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+  .header-title{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px;color:#111827}
+  .header-icons{display:flex;gap:14px;color:#6b7280;font-size:20px}
+  .subtabs{display:flex;border-top:1px solid #f3f4f6}
+  .subtab{flex:1;padding:9px 0;border:none;background:none;font-size:13px;border-bottom:2px solid transparent;cursor:pointer;color:#6b7280;transition:all .15s}
+  .subtab.active{color:#2563eb;border-bottom-color:#2563eb;font-weight:600}
+  .content{flex:1;overflow-y:auto;min-height:0}
+  .ad-banner{background:#2563eb;color:#fff;display:flex;align-items:center;padding:9px 14px;gap:10px;flex-shrink:0;font-size:13px}
+  .ad-banner button{background:none;border:none;color:#fff;cursor:pointer;font-size:18px;padding:0;display:flex}
+  .bottom-nav{display:flex;border-top:1px solid #f0f0f0;background:#fff;flex-shrink:0}
+  .nav-btn{flex:1;padding:8px 0;border:none;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;color:#9ca3af;transition:color .15s;font-size:9px;font-weight:400}
+  .nav-btn.active{color:#2563eb;font-weight:600}
+  .nav-btn i{font-size:22px}
+  .stk-special{clip-path:polygon(50% 0%,61% 15%,79% 9%,80% 28%,97% 35%,87% 51%,97% 65%,81% 71%,80% 90%,62% 85%,50% 100%,38% 85%,20% 90%,19% 71%,3% 65%,13% 51%,3% 35%,20% 28%,21% 9%,39% 15%)}
+  .stk-circle{border-radius:50%}
+  .stk-box{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:3px}
+  .stk-inner{display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;font-weight:500;user-select:none;transition:background .1s}
+  .dup-badge{position:absolute;top:-3px;right:-3px;background:#ef4444;color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
+  .dup-btn{background:#dbeafe;color:#1d4ed8;border:none;border-radius:4px;padding:1px 5px;font-size:9px;cursor:pointer;font-weight:600;font-family:inherit}
+  .sec-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 0;user-select:none}
+  .sec-hdr-name{font-weight:600;font-size:14px;color:#111827}
+  .sec-hdr-right{display:flex;align-items:center;gap:8px}
+  .sec-count{font-size:12px;color:#9ca3af}
+  .sticker-grid{display:flex;flex-wrap:wrap;gap:6px;padding:8px 0}
+  .sec-divider{height:1px;background:#f3f4f6;margin-bottom:4px}
+  .search-box{padding:12px 16px 4px}
+  .search-input{width:100%;padding:9px 16px;border-radius:20px;border:1px solid #e5e7eb;background:#f9fafb;font-size:14px;color:#111827;outline:none}
+  .search-input:focus{border-color:#93c5fd;background:#fff}
+  .empty-state{text-align:center;padding:60px 24px}
+  .empty-state i{font-size:52px;color:#d1d5db}
+  .empty-state h3{font-weight:600;font-size:17px;margin:16px 0 8px;color:#111827}
+  .empty-state p{color:#6b7280;font-size:13px;line-height:1.6}
+  .stat-card{background:#f9fafb;border-radius:10px;padding:12px;text-align:center;border:1px solid #f3f4f6}
+  .stat-num{font-size:22px;font-weight:700;color:#111827}
+  .stat-lbl{font-size:11px;color:#6b7280;margin-top:2px}
+  .prog-bar{background:#e5e7eb;border-radius:999px;height:6px;overflow:hidden}
+  .prog-fill{height:100%;border-radius:999px;transition:width .4s}
+  .card{background:#f9fafb;border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #f3f4f6}
+  .card-title{font-weight:600;font-size:14px;margin-bottom:12px;color:#111827}
+  .settings-row{display:flex;align-items:center;padding:13px 0;border-bottom:1px solid #f3f4f6;cursor:pointer}
+  .settings-row i:first-child{font-size:20px;margin-right:12px;color:#6b7280}
+  .settings-label{flex:1;font-size:14px;color:#111827}
+  .qr-wrap{text-align:center;margin-bottom:18px}
+  .qr-container{display:inline-block;padding:12px;background:#fff;border-radius:12px;border:1px solid #e5e7eb}
+  .tag{border-radius:4px;padding:2px 7px;font-size:11px}
+  .tag-green{background:#dcfce7;color:#166534}
+  .tag-blue{background:#dbeafe;color:#1e40af}
+  .exchange-box{border-radius:10px;padding:14px;margin-bottom:10px}
+  .exchange-box.green{background:#f0fdf4;border:1px solid #bbf7d0}
+  .exchange-box.blue{background:#eff6ff;border:1px solid #bfdbfe}
+  .exchange-box-title{font-weight:600;font-size:13px;margin-bottom:8px}
+  .exchange-box.green .exchange-box-title{color:#166534}
+  .exchange-box.blue .exchange-box-title{color:#1e40af}
+  .rep-ctrl{display:flex;align-items:center;gap:4px}
+  .rep-btn{border:none;border-radius:50%;width:18px;height:18px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;padding:0}
+  .rep-btn.minus{background:#ef4444;color:#fff}
+  .rep-btn.plus{background:#22c55e;color:#fff}
+  .friend-input-row{display:flex;gap:8px;margin-bottom:10px}
+  .friend-input{flex:1;padding:9px 12px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-size:12px;color:#111827;outline:none}
+  .btn-primary{background:#2563eb;color:#fff;border:none;border-radius:20px;padding:9px 18px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:600}
+  .btn-sm{border-radius:10px;padding:9px 14px}
+  .pro-banner{background:#2563eb;border-radius:12px;padding:18px;margin-bottom:24px;color:#fff;display:flex;align-items:center;gap:14px}
+  .pro-icon{font-size:36px}
+  .section-label{font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;margin:20px 0 8px}
+  .section-label:first-child{margin-top:0}
+  .loader{display:flex;align-items:center;justify-content:center;height:100vh;flex-direction:column;gap:12px}
+  .loader i{font-size:48px;color:#2563eb;animation:spin 1.5s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="loader">
+    <i class="ti ti-ball-football"></i>
+    <p style="color:#6b7280;font-size:14px">Cargando álbum...</p>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATOS DEL ÁLBUM
+// ============================================================
+const T=[
+  ["USA","Estados Unidos","🇺🇸"],["MEX","México","🇲🇽"],["CAN","Canadá","🇨🇦"],
+  ["PAN","Panamá","🇵🇦"],["HON","Honduras","🇭🇳"],["JAM","Jamaica","🇯🇲"],
+  ["CRC","Costa Rica","🇨🇷"],["ARG","Argentina","🇦🇷"],["BRA","Brasil","🇧🇷"],
+  ["COL","Colombia","🇨🇴"],["URU","Uruguay","🇺🇾"],["ECU","Ecuador","🇪🇨"],
+  ["VEN","Venezuela","🇻🇪"],["CHL","Chile","🇨🇱"],["PAR","Paraguay","🇵🇾"],
+  ["FRA","Francia","🇫🇷"],["GER","Alemania","🇩🇪"],["ESP","España","🇪🇸"],
+  ["POR","Portugal","🇵🇹"],["ENG","Inglaterra","🏴󠁧󠁢󠁥󠁮󠁧󠁿"],["NED","Países Bajos","🇳🇱"],
+  ["BEL","Bélgica","🇧🇪"],["CRO","Croacia","🇭🇷"],["ITA","Italia","🇮🇹"],
+  ["SRB","Serbia","🇷🇸"],["POL","Polonia","🇵🇱"],["AUT","Austria","🇦🇹"],
+  ["SUI","Suiza","🇨🇭"],["DEN","Dinamarca","🇩🇰"],["SCO","Escocia","🏴󠁧󠁢󠁳󠁣󠁴󠁿"],
+  ["TUR","Turquía","🇹🇷"],["UKR","Ucrania","🇺🇦"],["SVN","Eslovenia","🇸🇮"],
+  ["JPN","Japón","🇯🇵"],["KOR","Corea del Sur","🇰🇷"],["IRN","Irán","🇮🇷"],
+  ["AUS","Australia","🇦🇺"],["KSA","Arabia Saudita","🇸🇦"],["JOR","Jordania","🇯🇴"],
+  ["IRQ","Irak","🇮🇶"],["UZB","Uzbekistán","🇺🇿"],["IDN","Indonesia","🇮🇩"],
+  ["MAR","Marruecos","🇲🇦"],["SEN","Senegal","🇸🇳"],["NGA","Nigeria","🇳🇬"],
+  ["CMR","Camerún","🇨🇲"],["EGY","Egipto","🇪🇬"],["RSA","Sudáfrica","🇿🇦"]
+];
+const SPEC=[
+  {id:"FE",name:"FWC - Especiales",em:"🏆",sp:true,ns:["00","1","2","3","4"]},
+  {id:"FB",name:"FWC - Balón y Países",em:"⚽🌎",sp:true,ns:["5","6","7","8"]},
+  {id:"FH",name:"FWC - Historia",em:"📜",sp:true,ns:["9","10","11","12","13","14","15","16","17","18","19"]},
+];
+const SECS=[
+  ...SPEC,
+  ...T.map(([c,n,f])=>({id:c,name:`${c} - ${n}`,em:f,sp:false,ns:Array.from({length:20},(_,i)=>String(i+1))}))
+];
+const TOTAL=SECS.reduce((a,s)=>a+s.ns.length,0); // 980
+const K=(s,n)=>`${s}:${n}`;
+
+// ============================================================
+// ESTADO DE LA APP
+// ============================================================
+let DAT={};
+let TAB="album";
+let SUB="todas";
+let Q="";
+let OPN={};
+let AD=true;
+let FC="";
+let FD=null;
+let FERR="";
+let QRURL=null;
+let COPIED=false;
+
+// ============================================================
+// ALMACENAMIENTO LOCAL
+// ============================================================
+function loadData(){
+  try{
+    const raw=localStorage.getItem("panini_fifa_2026");
+    if(raw) DAT=JSON.parse(raw);
+  }catch(e){}
+}
+function saveData(){
+  try{ localStorage.setItem("panini_fifa_2026",JSON.stringify(DAT)); }catch(e){}
+}
+
+// ============================================================
+// ACCIONES
+// ============================================================
+function toggle(sid,num){
+  const k=K(sid,num);
+  const c=DAT[k]||{h:false,d:0};
+  DAT[k]={h:!c.h,d:c.h?0:c.d||0};
+  saveData(); render();
+}
+function addD(sid,num){
+  const k=K(sid,num);
+  const c=DAT[k]||{h:false,d:0};
+  DAT[k]={h:true,d:(c.d||0)+1};
+  saveData(); render();
+}
+function remD(sid,num){
+  const k=K(sid,num);
+  const c=DAT[k]||{h:false,d:0};
+  DAT[k]={...c,d:Math.max(0,(c.d||0)-1)};
+  saveData(); render();
+}
+function setTab(t){TAB=t;if(t==="exchange"&&!QRURL)genQR();render();}
+function setSub(s){SUB=s;Q="";render();}
+function toggleSec(id){OPN[id]=OPN[id]===false?true:false;render();}
+function setQ(v){Q=v;render();}
+function setFC(v){FC=v;}
+
+// ============================================================
+// ESTADÍSTICAS
+// ============================================================
+function getStats(){
+  let h=0,ds=0,td=0;
+  SECS.forEach(s=>s.ns.forEach(n=>{
+    const d=DAT[K(s.id,n)]||{};
+    if(d.h)h++;
+    if(d.d>0){ds++;td+=d.d;}
+  }));
+  return{h,miss:TOTAL-h,ds,td,pct:Math.round(h/TOTAL*100)};
+}
+function secHave(s){
+  return s.ns.filter(n=>(DAT[K(s.id,n)]||{}).h).length;
+}
+
+// ============================================================
+// CÓDIGO DE INTERCAMBIO
+// ============================================================
+function getMyCode(){
+  const dups=[],needs=[];
+  SECS.forEach(s=>s.ns.forEach(n=>{
+    const d=DAT[K(s.id,n)]||{};
+    if(d.d>0) dups.push(`${s.id}:${n}x${d.d}`);
+    if(!d.h) needs.push(`${s.id}:${n}`);
+  }));
+  try{
+    return btoa(unescape(encodeURIComponent(JSON.stringify({v:1,dups,needs:needs.slice(0,150)}))));
+  }catch(e){return "";}
+}
+function parseFriend(){
+  FC=document.getElementById("fcInput")?.value||FC;
+  try{
+    const d=JSON.parse(decodeURIComponent(escape(atob(FC.trim()))));
+    if(!d.v) throw new Error();
+    FD=d; FERR="";
+  }catch(e){
+    FERR="Código inválido. Verifica el código de tu amigo.";
+    FD=null;
+  }
+  render();
+}
+function copyCode(){
+  const code=getMyCode();
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(code).then(()=>{
+      COPIED=true; render();
+      setTimeout(()=>{COPIED=false;render();},2000);
+    }).catch(()=>fallbackCopy(code));
+  } else { fallbackCopy(code); }
+}
+function fallbackCopy(text){
+  const ta=document.createElement("textarea");
+  ta.value=text; document.body.appendChild(ta);
+  ta.select(); document.execCommand("copy");
+  document.body.removeChild(ta);
+  COPIED=true; render();
+  setTimeout(()=>{COPIED=false;render();},2000);
+}
+function genQR(){
+  import('https://cdn.jsdelivr.net/npm/qrcode@1.5.3/+esm').then(m=>{
+    const QR=m.default||m;
+    QR.toDataURL(getMyCode(),{width:200,margin:1,color:{dark:"#111827",light:"#ffffff"}})
+      .then(url=>{QRURL=url;if(TAB==="exchange")render();})
+      .catch(()=>{});
+  }).catch(()=>{});
+}
+
+// ============================================================
+// GENERACIÓN DE HTML
+// ============================================================
+function stkHTML(sid,num,sp){
+  const d=DAT[K(sid,num)]||{h:false,d:0};
+  const h=d.h, dups=d.d||0;
+  const sz=sp?46:40;
+  const cls=`stk-inner ${sp?"stk-special":"stk-circle"}`;
+  const bg=sp?(h?"#78350f":"#fef3c7"):(h?"#374151":"#f3f4f6");
+  const col=sp?(h?"#fef3c7":"#92400e"):(h?"#fff":"#9ca3af");
+  const td=dups>0?"line-through":"none";
+  const badge=dups>0?`<div class="dup-badge">${dups}</div>`:"";
+  const dupBtn=h?`<button class="dup-btn" onclick="event.stopPropagation();addD('${sid}','${num}')">+dup</button>`:"";
+  return `<div class="stk-box">
+    <div class="${cls}" onclick="toggle('${sid}','${num}')"
+      style="width:${sz}px;height:${sz}px;background:${bg};color:${col}">
+      <span style="text-decoration:${td}">${num}</span>
+    </div>
+    ${badge}
+    ${dupBtn}
+  </div>`;
+}
+
+function albumView(){
+  const st=getStats();
+
+  // --- REPETIDAS ---
+  if(SUB==="repetidas"){
+    const reps=SECS.map(s=>({...s,ns:s.ns.filter(n=>(DAT[K(s.id,n)]||{}).d>0)}))
+      .filter(s=>s.ns.length>0);
+    if(!reps.length) return `
+      <div class="empty-state">
+        <i class="ti ti-player-stop"></i>
+        <h3>Aún no tienes repetidas</h3>
+        <p>Toca cualquier figurita que ya tengas y luego pulsa <strong>+dup</strong> para registrarla como repetida.</p>
+      </div>`;
+    return `<div style="padding:0 16px 16px">${reps.map(s=>`
+      <div style="margin-bottom:20px">
+        <div style="font-weight:600;font-size:14px;padding:10px 0;border-bottom:1px solid #f3f4f6;margin-bottom:10px;color:#111827">${s.name} ${s.em}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">${s.ns.map(n=>{
+          const dups=(DAT[K(s.id,n)]||{}).d||0;
+          return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            ${stkHTML(s.id,n,s.sp)}
+            <div class="rep-ctrl">
+              <button class="rep-btn minus" onclick="remD('${s.id}','${n}')">−</button>
+              <span style="font-size:11px;font-weight:600;min-width:22px;text-align:center">${dups}×</span>
+              <button class="rep-btn plus" onclick="addD('${s.id}','${n}')">+</button>
+            </div>
+          </div>`;
+        }).join("")}</div>
+      </div>`).join("")}</div>`;
+  }
+
+  // --- TODAS / ME FALTAN ---
+  const ql=Q.toLowerCase();
+  const disp=SECS.map(s=>{
+    let ns=s.ns;
+    if(SUB==="faltan") ns=ns.filter(n=>!(DAT[K(s.id,n)]||{}).h);
+    if(Q){
+      const nm=s.name.toLowerCase().includes(ql)||s.em.includes(Q);
+      if(!nm) ns=ns.filter(n=>n.includes(Q));
+    }
+    return{...s,ns};
+  }).filter(s=>s.ns.length>0);
+
+  if(SUB==="faltan"&&!disp.length&&!Q) return `
+    <div class="empty-state">
+      <i class="ti ti-trophy" style="color:#f59e0b"></i>
+      <h3>¡Álbum completo! 🎉</h3>
+      <p>Felicidades, lograste completar las ${TOTAL} figuritas del álbum.</p>
+    </div>`;
+
+  const searchBox=SUB==="faltan"?`<div class="search-box">
+    <input class="search-input" value="${Q.replace(/"/g,'&quot;')}" oninput="setQ(this.value)" placeholder="🔍 Buscar figurita o selección...">
+  </div>`:"";
+
+  return `<div style="padding:0 16px 16px">${searchBox}
+    ${!disp.length?`<div style="text-align:center;padding:40px 0;color:#9ca3af">Sin resultados</div>`:""}
+    ${disp.map(s=>{
+      const isOpen=OPN[s.id]!==false;
+      const sh=secHave(s);
+      return `<div>
+        <div class="sec-hdr" onclick="toggleSec('${s.id}')">
+          <span class="sec-hdr-name">${s.name} ${s.em}</span>
+          <div class="sec-hdr-right">
+            <span class="sec-count">${sh}/${s.ns.length}</span>
+            <i class="ti ti-chevron-${isOpen?"up":"down"}" style="font-size:15px;color:#9ca3af"></i>
+          </div>
+        </div>
+        ${isOpen?`<div>
+          <div class="sticker-grid">${s.ns.map(n=>stkHTML(s.id,n,s.sp)).join("")}</div>
+          <div class="sec-divider"></div>
+        </div>`:""}
+      </div>`;
+    }).join("")}
+  </div>`;
+}
+
+function statsView(){
+  const s=getStats();
+  const teams=SECS.slice(3,15).map(sec=>{
+    const h=secHave(sec);
+    return{id:sec.id,em:sec.em,h,tot:sec.ns.length,pct:Math.round(h/sec.ns.length*100)};
+  });
+  const specials=SECS.slice(0,3).map(sec=>{
+    const h=secHave(sec);
+    return{...sec,h,pct:Math.round(h/sec.ns.length*100)};
+  });
+  return `<div style="padding:16px">
+    <div class="card" style="text-align:center;margin-bottom:16px">
+      <div style="font-size:54px;font-weight:700;color:#2563eb;line-height:1">${s.pct}%</div>
+      <div style="font-size:12px;color:#6b7280;margin:4px 0 14px">completado · ${s.h} de ${TOTAL} figuritas</div>
+      <div class="prog-bar" style="height:10px">
+        <div class="prog-fill" style="background:#2563eb;width:${s.pct}%"></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      ${[["📋","Total",TOTAL,""],["✅","Tengo",s.h,"#f0fdf4"],["❌","Me faltan",s.miss,"#fef2f2"],["🔄","Repetidas",s.td,"#eff6ff"]].map(([ic,l,v,bg])=>`
+        <div class="stat-card" style="${bg?`background:${bg};`:""}">
+          <div style="font-size:20px">${ic}</div>
+          <div class="stat-num">${v}</div>
+          <div class="stat-lbl">${l}</div>
+        </div>`).join("")}
+    </div>
+    <div class="card">
+      <div class="card-title">⭐ FWC Especiales</div>
+      ${specials.map(sec=>`<div style="margin-bottom:9px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+          <span>${sec.em} ${sec.name.replace("FWC - ","")}</span>
+          <span style="color:#9ca3af">${sec.h}/${sec.ns.length}</span>
+        </div>
+        <div class="prog-bar">
+          <div class="prog-fill" style="background:#f59e0b;width:${sec.pct}%"></div>
+        </div>
+      </div>`).join("")}
+    </div>
+    <div class="card">
+      <div class="card-title">🌍 Progreso por selección</div>
+      ${teams.map(t=>`<div style="margin-bottom:9px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+          <span>${t.em} ${t.id}</span>
+          <span style="color:#9ca3af">${t.h}/${t.tot}</span>
+        </div>
+        <div class="prog-bar">
+          <div class="prog-fill" style="background:#2563eb;width:${t.pct}%"></div>
+        </div>
+      </div>`).join("")}
+    </div>
+  </div>`;
+}
+
+function exchangeView(){
+  const myCode=getMyCode();
+  const qrImg=QRURL
+    ?`<img src="${QRURL}" alt="Mi código QR" style="width:200px;height:200px;display:block;border-radius:4px">`
+    :`<div style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;font-size:12px;color:#9ca3af">
+        <i class="ti ti-qrcode" style="font-size:36px"></i>Generando código QR...
+      </div>`;
+  let friendHtml="";
+  if(FD){
+    const myNeeds=new Set();
+    SECS.forEach(s=>s.ns.forEach(n=>{if(!(DAT[K(s.id,n)]||{}).h)myNeeds.add(`${s.id}:${n}`);}));
+    const fCanGive=(FD.dups||[]).map(d=>d.split("x")[0]).filter(k=>myNeeds.has(k))
+      .map(k=>`<span class="tag tag-green">${k.replace(":"," #")}</span>`);
+    const fNeeds=new Set(FD.needs||[]);
+    const iCanGive=[];
+    SECS.forEach(s=>s.ns.forEach(n=>{
+      const d=DAT[K(s.id,n)]||{};
+      if(d.d>0&&fNeeds.has(`${s.id}:${n}`)) iCanGive.push(`${s.id} #${n}`);
+    }));
+    friendHtml=`
+      <div class="exchange-box green">
+        <div class="exchange-box-title"><i class="ti ti-circle-check"></i> Tu amigo puede darte (${fCanGive.length})</div>
+        ${fCanGive.length
+          ?`<div style="display:flex;flex-wrap:wrap;gap:4px">${fCanGive.join("")}</div>`
+          :`<p style="color:#6b7280;font-size:12px">No tiene repetidas que te hagan falta.</p>`}
+      </div>
+      <div class="exchange-box blue">
+        <div class="exchange-box-title"><i class="ti ti-arrows-exchange"></i> Puedes darle a tu amigo (${iCanGive.length})</div>
+        ${iCanGive.length
+          ?`<div style="display:flex;flex-wrap:wrap;gap:4px">${iCanGive.map(k=>`<span class="tag tag-blue">${k}</span>`).join("")}</div>`
+          :`<p style="color:#6b7280;font-size:12px">No tienes repetidas que tu amigo necesite.</p>`}
+      </div>`;
+  }
+  return `<div style="padding:16px">
+    <h2 style="font-size:16px;font-weight:700;margin-bottom:4px">Mi código QR</h2>
+    <p style="color:#6b7280;font-size:12px;margin-bottom:14px;line-height:1.5">
+      Comparte tu código para que tus amigos vean tus figuritas repetidas y lo que te falta.
+    </p>
+    <div class="qr-wrap">
+      <div class="qr-container">${qrImg}</div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
+        <button class="btn-primary" onclick="copyCode()">${COPIED?"✓ Copiado":"📋 Copiar código"}</button>
+      </div>
+      <p style="font-size:11px;color:#9ca3af;margin-top:6px">${getStats().td} repetidas · ${getStats().miss} me faltan</p>
+    </div>
+    <hr style="border:none;border-top:1px solid #f3f4f6;margin:16px 0">
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:10px">Ver código de amigo</h3>
+    <div class="friend-input-row">
+      <input id="fcInput" class="friend-input" placeholder="Pega aquí el código de tu amigo" value="${FC.replace(/"/g,'&quot;')}">
+      <button class="btn-primary btn-sm" onclick="FC=document.getElementById('fcInput').value;parseFriend()">Ver</button>
+    </div>
+    ${FERR?`<p style="color:#ef4444;font-size:12px;margin-bottom:12px">${FERR}</p>`:""}
+    ${friendHtml}
+  </div>`;
+}
+
+function settingsView(){
+  const s=getStats();
+  return `<div style="padding:16px">
+    <div class="pro-banner">
+      <span class="pro-icon">⭐</span>
+      <div>
+        <div style="font-weight:700;font-size:16px">Figuritas Pro</div>
+        <div style="font-size:12px;opacity:.9">Disfruta la app sin anuncios</div>
+      </div>
+      <i class="ti ti-lock" style="font-size:22px;margin-left:auto;opacity:.8"></i>
+    </div>
+    <div class="section-label">General</div>
+    ${[
+      ["ti-crown","Obtener versión Pro"],
+      ["ti-help-circle","¿Cómo funciona?"],
+      ["ti-star","Calificar la app"],
+      ["ti-mail","Contáctanos"],
+      ["ti-brand-instagram","Síguenos en redes"]
+    ].map(([ic,l])=>`
+      <div class="settings-row">
+        <i class="ti ${ic}"></i>
+        <span class="settings-label">${l}</span>
+        <i class="ti ti-chevron-right" style="color:#9ca3af;font-size:15px"></i>
+      </div>`).join("")}
+    <div class="section-label">Mis datos</div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center">
+        ${[["Tengo",s.h],["Me faltan",s.miss],["Repetidas",s.td],["Completado",s.pct+"%"]].map(([l,v])=>`
+          <div>
+            <div style="font-size:20px;font-weight:700;color:#111827">${v}</div>
+            <div style="font-size:11px;color:#6b7280">${l}</div>
+          </div>`).join("")}
+      </div>
+    </div>
+    <div class="settings-row" onclick="if(confirm('¿Reiniciar todo el álbum?\\nEsta acción no se puede deshacer.')){DAT={};saveData();render();}">
+      <i class="ti ti-trash" style="color:#ef4444"></i>
+      <span class="settings-label" style="color:#ef4444">Reiniciar álbum completo</span>
+      <i class="ti ti-chevron-right" style="color:#9ca3af;font-size:15px"></i>
+    </div>
+    <div class="section-label">Acerca de</div>
+    <div class="settings-row" style="cursor:default">
+      <i class="ti ti-device-mobile"></i>
+      <span class="settings-label" style="color:#6b7280">Versión de la app</span>
+      <span style="font-size:13px;color:#9ca3af">v1.0.0</span>
+    </div>
+    <div class="settings-row" style="cursor:default">
+      <i class="ti ti-cards"></i>
+      <span class="settings-label" style="color:#6b7280">Total figuritas</span>
+      <span style="font-size:13px;color:#9ca3af">${TOTAL}</span>
+    </div>
+    <p style="text-align:center;font-size:11px;color:#d1d5db;margin:24px 0">Álbum Panini · FIFA World Cup 2026 · 48 selecciones</p>
+  </div>`;
+}
+
+// ============================================================
+// RENDER PRINCIPAL
+// ============================================================
+const NAV=[
+  ["album","ti-book","Álbum"],
+  ["stats","ti-chart-bar","Estadísticas"],
+  ["exchange","ti-arrows-exchange","Cambiar"],
+  ["settings","ti-settings","Config"]
+];
+const SUBS=[["todas","Todas"],["faltan","Me faltan"],["repetidas","Repetidas"]];
+
+function render(){
+  const subTabs=TAB==="album"?`
+    <div class="subtabs">${SUBS.map(([v,l])=>`
+      <button class="subtab ${SUB===v?"active":""}" onclick="setSub('${v}')">${l}</button>`).join("")}
+    </div>`:"";
+
+  const content=
+    TAB==="album"?albumView():
+    TAB==="stats"?statsView():
+    TAB==="exchange"?exchangeView():
+    settingsView();
+
+  const adBanner=AD?`
+    <div class="ad-banner">
+      <i class="ti ti-crown"></i>
+      <span style="flex:1">¿Remover anuncios? <u style="cursor:pointer">Versión Pro</u></span>
+      <button onclick="AD=false;render()"><i class="ti ti-x"></i></button>
+    </div>`:"";
+
+  const nav=`
+    <div class="bottom-nav">${NAV.map(([v,ic,l])=>`
+      <button class="nav-btn ${TAB===v?"active":""}" onclick="setTab('${v}')">
+        <i class="ti ${ic}"></i>
+        <span>${l}</span>
+      </button>`).join("")}
+    </div>`;
+
+  document.getElementById("app").innerHTML=`
+    <div class="header">
+      <div class="header-row">
+        <div class="header-title">
+          <i class="ti ti-ball-football" style="color:#2563eb"></i>
+          Álbum FIFA 2026
+          <i class="ti ti-chevron-down" style="font-size:13px;color:#9ca3af"></i>
+        </div>
+        <div class="header-icons">
+          <i class="ti ti-lock" style="cursor:pointer"></i>
+          <i class="ti ti-share" style="cursor:pointer"></i>
+          <i class="ti ti-dots-vertical" style="cursor:pointer"></i>
+        </div>
+      </div>
+      ${subTabs}
+    </div>
+    <div class="content">${content}</div>
+    ${adBanner}
+    ${nav}`;
+}
+
+// ============================================================
+// INICIO
+// ============================================================
+loadData();
+render();
+genQR();
+</script>
+</body>
+</html>
