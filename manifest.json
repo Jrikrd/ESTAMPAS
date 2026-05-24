@@ -2,7 +2,7 @@
   "name": "Álbum Panini FIFA 2026",
   "short_name": "Panini 2026",
   "description": "Control de figuritas del álbum Panini FIFA World Cup 2026",
-  "start_url": "/panini-fifa-2026.html",
+  "start_url": "https://Jrikrd.github.io/ESTAMPAS/panini-fifa-2026.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
